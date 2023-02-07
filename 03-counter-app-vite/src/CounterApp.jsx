@@ -1,6 +1,6 @@
 import PropTypes, { string } from 'prop-types';
 
-
+//Prueba git
 
 export const CounterApp = ({value}) => {
 
