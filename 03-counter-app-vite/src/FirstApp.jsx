@@ -7,9 +7,9 @@ export const FirstApp = ( { title, subTitle = 'Boo gana', name} ) => {
 
   return (
     <>
-      <h2>{ title}</h2>
-      <p>{subTitle}</p>
-      <p>{name}</p>
+      <h2>{ title }</h2>
+      <p>{ subTitle }</p>
+      <p>{ name }</p>
     </>
   )
 }
@@ -21,7 +21,7 @@ FirstApp.propTypes = {
 }
 
 FirstApp.defaultProps = {
-  title: 'No hay titulo',
+  //title: 'No hay titulo',
   subTitle: 'No hay subtitulo',
   name: 'Abraham de León'
 }
