@@ -23,7 +23,7 @@ export const GifGrid = ({ category }) => {
                 {
                     images.map( ({id, title, url}) => (
                         <li key={id}>
-                            <img src={url} alt={title}/>
+                            {title}
                         </li>
                     ))
                 }
