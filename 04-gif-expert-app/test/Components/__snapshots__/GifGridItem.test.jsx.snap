@@ -5,8 +5,13 @@ exports[`Pruebas de GifGridItem Debería comprobar el snapshot 1`] = `
   <div
     class="card"
   >
-    <img />
-    <p />
+    <img
+      alt="Saitama"
+      src="http://localhost/onepunch.jpg"
+    />
+    <p>
+      Saitama
+    </p>
   </div>
 </div>
 `;
