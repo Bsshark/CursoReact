@@ -1,20 +1,33 @@
-import React from 'react'
+import { useForm } from '../hooks/useForm';
 
 export const TodoAdd = ({onNewTodo}) => {
 
-    const onSubmit = (e) => {
+    const {desc, onInputChange, onResetForm} = useForm({
+      desc: ''
+    });
+
+    const onFormSubmit = (e) => {
         e.preventDefault();
-        onNewTodo({
-            id: new Date().getTime(),
-            desc: e.target[0].value,
-            done: false
-        });
+
+        if(desc.length <= 1) return;
+
+        const newTodo = {
+          id: new Date().getTime(),
+          done: false,
+          desc: desc
+        }
+
+        onNewTodo(newTodo);
+        onResetForm();
     }
 
   return (
-    <form onSubmit={onSubmit}>
-        <input  type="text" placeholder="¿Qué hay que hacer" className="form-control"/>
-        <button type="submit" className="btn btn-outline-primary mt-1">Agregar</button>
+    <form onSubmit={onFormSubmit}>
+        <input  
+          type="text" placeholder="¿Qué hay que hacer" className="form-control"
+          name='desc' value={ desc } onChange={onInputChange}/>
+        <button 
+          type="submit" className="btn btn-outline-primary mt-1">Agregar</button>
     </form>
   )
 }
