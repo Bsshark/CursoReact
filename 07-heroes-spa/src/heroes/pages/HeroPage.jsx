@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getHeroById } from '../helpers';
 
@@ -6,7 +6,7 @@ export const HeroPage = () => {
 
   const {id} = useParams();
 
-  const hero = getHeroById(id);
+  const hero = useMemo(() => getHeroById(id), [id])
 
   const navigate = useNavigate();
 
@@ -24,14 +24,14 @@ export const HeroPage = () => {
         <img 
         src={`/assets/heroes/${id}.jpg`} 
         alt={hero.superhero}
-        className='img-thumbnail' />
+        className='img-thumbnail animate__animated animate__fadeInDown' />
       </div>
       <div className="col-8">
-        <h3>{hero.superhero}</h3>
+        <h3 className='animate__animated animate__fadeInDown'>{hero.superhero}</h3>
         <ul className='list-group list-group-flush'>
-          <li className='list-group-item'><b>Alter ego:</b> { hero.alter_ego }</li>
-          <li className='list-group-item'><b>Publisher:</b> {hero.publisher} </li>
-          <li className='list-group-item'><b>First appareance:</b> {hero.first_appearance} </li>
+          <li className='list-group-item '><div className='animate__animated animate__fadeIn animate__delay-1s'><b>Alter ego:</b> { hero.alter_ego }</div></li>
+          <li className='list-group-item '><div className='animate__animated animate__fadeIn animate__delay-1s'><b>Publisher:</b> {hero.publisher} </div></li>
+          <li className='list-group-item '><div className='animate__animated animate__fadeIn animate__delay-1s'><b>First appareance:</b> {hero.first_appearance} </div></li>
         </ul>
 
         <h5 className='mt-3'>
