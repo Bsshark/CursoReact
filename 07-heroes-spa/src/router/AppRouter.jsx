@@ -1,6 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom"
-
-import { Navbar } from '../ui';
+import { Routes, Route } from "react-router-dom"
 
 import { HeroesRoutes } from "../heroes/"
 import { LoginPage } from "../auth/pages/LoginPage"

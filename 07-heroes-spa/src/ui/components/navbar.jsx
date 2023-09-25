@@ -57,7 +57,7 @@ export const Navbar = () => {
                         { user?.name }
                     </span>
 
-                    <button className='nav-item nav-link btn' onClick={onLogout}>
+                    <button className='nav-item nav-link btn' onClick={onLogout} data-testid="btn-logout">
                         { !user ? 'Login' : 'Logout'}
                     </button>
                 </ul>

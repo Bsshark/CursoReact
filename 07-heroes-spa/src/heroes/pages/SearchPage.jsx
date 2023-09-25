@@ -39,7 +39,7 @@ export const SearchPage = () => {
         <div className="col-5">
           <h4>Searching</h4>
           <hr />
-          <form onSubmit={onSearchSubmit}>
+          <form data-testid="formSearch" onSubmit={onSearchSubmit}>
             <input type="text" 
             placeholder="Search a hero name..."
             className="form-control"
@@ -48,7 +48,7 @@ export const SearchPage = () => {
             value={searchText}
             onChange={onInputChange}/>
 
-            <button className="btn btn-outline-primary mt-1">
+            <button data-testid="clickSubmitBtn" className="btn btn-outline-primary mt-1">
               Search
             </button>
           </form>
@@ -64,12 +64,12 @@ export const SearchPage = () => {
             ? <div className="alert alert-primary">Search a Hero</div>
             : (heroes.length === 0) && <div className="alert alert-danger">No hero with name <b>{q}</b></div>
           } */}
-          <div className="alert alert-primary animate__animated animate__fadeIn" style={{display: showSearch ? '' : 'none'}}>
+          <div data-testid="alertHeroDiv" className="alert alert-primary animate__animated animate__fadeIn" style={{display: showSearch ? '' : 'none'}}>
             Search a Hero
           </div>
             
-          <div className="alert alert-danger animate__animated animate__fadeIn" style={{display: showError ? '' : 'none'}}>
-            No hero with name <b>{q}</b>
+          <div data-testid="alertNoHeroDiv" className="alert alert-danger animate__animated animate__fadeIn" style={{display: showError ? '' : 'none'}}>
+            No hero with <b>{q}</b>
           </div>
           
 
