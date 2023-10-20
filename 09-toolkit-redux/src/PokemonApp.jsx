@@ -31,8 +31,14 @@ export const PokemonApp = () => {
           }
         </ul>
 
+        {
+          <button disabled={isLoading || page === 1} onClick={() => dispatch(getPokemons(page-2))}>
+            Anterior
+          </button>
+        }
+
         {<button disabled={isLoading} onClick={() => dispatch(getPokemons(page))}>
-          Next
+          Siguiente
         </button>}
     </>
   )
