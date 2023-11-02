@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { signInWithGoogle, registerUserWithEmailPassword, loginUserWithEmailPassword } from "../../firebase"
+import { signInWithGoogle, registerUserWithEmailPassword, loginUserWithEmailPassword, logOutFirebase } from "../../firebase"
 import { checkingCredentials, logout, login } from "./authSlice"
 
 export const checkingAuthentication = (email, password) => {
@@ -41,6 +41,12 @@ export const startLoginUserWithEmailPassword = ({email, password}) => {
         if(!ok) return dispatch(logout({errorMessage}));
 
         dispatch(login({uid, displayName, email, photoURL}));
-        navigate('/');
+    }
+}
+
+export const startLogOut = () => {
+    return async (dispatch) => {
+        await logOutFirebase();
+        dispatch(logout());
     }
 }
