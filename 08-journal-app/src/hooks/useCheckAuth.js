@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../store";
 import { FirebaseAuth } from "../firebase";
+import { startLoadingNotes } from "../store/journal";
 
 export const useCheckAuth = () => {
     const { status } = useSelector(state => state.auth);
@@ -19,7 +20,7 @@ export const useCheckAuth = () => {
           displayName,
           photoURL
         }));
-  
+        dispatch(startLoadingNotes());  
       });
   
     }, [])
