@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { signInWithGoogle, registerUserWithEmailPassword, loginUserWithEmailPassword, logOutFirebase } from "../../firebase"
 import { checkingCredentials, logout, login } from "./authSlice"
+import { clearNotesLogout } from "../journal"
 
 export const checkingAuthentication = (email, password) => {
     return async( dispatch ) => {
@@ -47,6 +48,7 @@ export const startLoginUserWithEmailPassword = ({email, password}) => {
 export const startLogOut = () => {
     return async (dispatch) => {
         await logOutFirebase();
+        dispatch(clearNotesLogout());
         dispatch(logout());
     }
 }
