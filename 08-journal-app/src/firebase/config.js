@@ -6,13 +6,23 @@ import { getFirestore } from 'firebase/firestore/lite';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+/* const firebaseConfig = {
   apiKey: "AIzaSyCzQ8mZwtq_8ph-vl-8FE_GLcwbJ3D2Lek",
   authDomain: "react-cursos-9dcaf.firebaseapp.com",
   projectId: "react-cursos-9dcaf",
   storageBucket: "react-cursos-9dcaf.appspot.com",
   messagingSenderId: "821684381528",
   appId: "1:821684381528:web:6671bab610654820fb672d"
+}; */
+
+//Testing
+const firebaseConfig = {
+  apiKey: "AIzaSyAfnxGYJ8TWtyIVQmH6nQovO9E_O1YQ4SU",
+  authDomain: "react-cursos-test-f5ee2.firebaseapp.com",
+  projectId: "react-cursos-test-f5ee2",
+  storageBucket: "react-cursos-test-f5ee2.appspot.com",
+  messagingSenderId: "556567737074",
+  appId: "1:556567737074:web:07bb28e3e17c4f01f1166b"
 };
 
 /* const firebaseConfig = {
