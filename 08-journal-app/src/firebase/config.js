@@ -2,6 +2,19 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
+import { getEnvironments } from "../helpers";
+
+/* console.log(process.env); */
+const {
+  VITE_APIKEY,
+  VITE_AUTHDOMAIN,
+  VITE_PROJECTID,
+  VITE_STORAGEBUCKET,
+  VITE_MESSAGINGSENDERID,
+  VITE_APPID
+} = getEnvironments();
+
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,12 +30,12 @@ import { getFirestore } from 'firebase/firestore/lite';
 
 //Testing
 const firebaseConfig = {
-  apiKey: "AIzaSyAfnxGYJ8TWtyIVQmH6nQovO9E_O1YQ4SU",
-  authDomain: "react-cursos-test-f5ee2.firebaseapp.com",
-  projectId: "react-cursos-test-f5ee2",
-  storageBucket: "react-cursos-test-f5ee2.appspot.com",
-  messagingSenderId: "556567737074",
-  appId: "1:556567737074:web:07bb28e3e17c4f01f1166b"
+  apiKey: VITE_APIKEY,
+  authDomain: VITE_AUTHDOMAIN,
+  projectId: VITE_PROJECTID,
+  storageBucket: VITE_STORAGEBUCKET,
+  messagingSenderId: VITE_MESSAGINGSENDERID,
+  appId: VITE_APPID
 };
 
 /* const firebaseConfig = {
