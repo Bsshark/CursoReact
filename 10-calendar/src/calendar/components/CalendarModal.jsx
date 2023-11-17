@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Modal from "react-modal";
 import "./CalendarModal.css";
 import { addHours, differenceInSeconds } from "date-fns";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+import { useCalendarStore, useUiStore } from "../../hooks";
 
 registerLocale("es", es);
 
@@ -22,14 +25,28 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export const CalendarModal = () => {
-  const [isModalOpen, setisModalOpen] = useState(true);
+  const { isDateModalOpen, closeDateModal } = useUiStore();
+  const { activeEvent, startSavingEvent } = useCalendarStore();
+  const [formSubmitted, setformSubmitted] = useState(false);
 
   const [formValues, setformValues] = useState({
     title: "Nota ejemplo",
-    notes: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit libero recusandae nihil fugiat ex velit neque adipisci quia ad sint? Eveniet deserunt odio magni modi neque non doloremque vitae libero.",
+    notes:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit libero recusandae nihil fugiat ex velit neque adipisci quia ad sint? Eveniet deserunt odio magni modi neque non doloremque vitae libero.",
     start: new Date(),
     end: addHours(new Date(), 2),
   });
+
+  const titleClass = useMemo(() => {
+    if (!formSubmitted) return "";
+    return formValues.title.length > 0 ? "" : "is-invalid";
+  }, [formValues.title, formSubmitted]);
+
+  useEffect(() => {
+    if(activeEvent !== null) {
+      setformValues({ ...activeEvent});
+    }
+  }, [activeEvent]);
 
   const onInputChange = ({ target }) => {
     setformValues({
@@ -46,28 +63,32 @@ export const CalendarModal = () => {
   };
 
   const onCloseModal = () => {
-    setisModalOpen(false);
+    closeDateModal();
+    setformSubmitted(false);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async(e) => {
+    setformSubmitted(true);
     e.preventDefault();
     const difference = differenceInSeconds(formValues.end, formValues.start);
-    if ( isNaN(difference) || difference <= 0) {
-        console.log('error en fechas');
-        return;
+    if (isNaN(difference) || difference <= 0) {
+      Swal.fire("Fechas incorrectas", "Revisar las fechas", "error");
+      return;
     }
 
-    if ( formValues.title.length <= 0 ) {
-        console.log('Error en titulo');
-        return;
+    if (formValues.title.length <= 0) {
+      return;
     }
 
     console.log(formValues);
+    await startSavingEvent(formValues);
+    closeDateModal();
+    setformSubmitted(false);
   };
 
   return (
     <Modal
-      isOpen={isModalOpen}
+      isOpen={isDateModalOpen}
       onRequestClose={onCloseModal}
       style={customStyles}
       className="modal"
@@ -114,7 +135,7 @@ export const CalendarModal = () => {
           <label>Titulo y notas</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${titleClass}`}
             placeholder="Título del evento"
             name="title"
             autoComplete="off"
