@@ -9,6 +9,7 @@ const {
   loginUsuario,
   revalidarToken,
 } = require("../controllers/auth");
+const { validarJwt } = require('../middlewares/validar-jwt');
 const { validarCampos } = require("../middlewares/validar-campos");
 
 const router = Router();
@@ -23,7 +24,7 @@ router.post(
     check("password", "La clave debe de ser de 6 caracteres").isLength({
       min: 6,
     }),
-    validarCampos
+    validarCampos,
   ],
   crearUsuario
 );
@@ -32,12 +33,13 @@ router.post(
   "/",
   [
     check("email", "El email es obligatorio").not().isEmpty(),
+    check("email", "El email no es válido").isEmail(),
     check("password", "La clave es obligatoria").not().isEmpty(),
-    validarCampos
+    validarCampos,
   ],
   loginUsuario
 );
 
-router.get("/renew", revalidarToken);
+router.get("/renew",validarJwt, revalidarToken);
 
 module.exports = router;

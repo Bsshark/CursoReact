@@ -10,6 +10,7 @@ const validarCampos = (req, res = response, next) => {
       errores: errors.mapped(),
     });
   }
+  next();
 };
 
 module.exports = {
